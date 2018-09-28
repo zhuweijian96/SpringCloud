@@ -23,6 +23,7 @@
         <module>configserver</module>
         <module>configclient</module>
         <module>zuul</module>
+        <module>turbine</module>
     </modules>
 
     <properties>
