@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.eurekaclient.mapper.ShopUserMapper" >
+
+    <resultMap id="BaseResultMap" type="com.example.eurekaclient.model.ShopUser" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="shop_account" property="shopAccount" jdbcType="VARCHAR" />
+        <result column="shop_password" property="shopPassword" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, shop_account, shop_password
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from shop_user
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from shop_user
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <insert id="insert" parameterType="com.example.eurekaclient.model.ShopUser" >
+        insert into shop_user (id, shop_account, shop_password
+            )
+        values (#{id,jdbcType=INTEGER}, #{shopAccount,jdbcType=VARCHAR}, #{shopPassword,jdbcType=VARCHAR}
+            )
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.example.eurekaclient.model.ShopUser" >
+        insert into shop_user
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="shopAccount != null" >
+                shop_account,
+            </if>
+            <if test="shopPassword != null" >
+                shop_password,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="shopAccount != null" >
+                #{shopAccount,jdbcType=VARCHAR},
+            </if>
+            <if test="shopPassword != null" >
+                #{shopPassword,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.example.eurekaclient.model.ShopUser" >
+        update shop_user
+        <set >
+            <if test="shopAccount != null" >
+                shop_account = #{shopAccount,jdbcType=VARCHAR},
+            </if>
+            <if test="shopPassword != null" >
+                shop_password = #{shopPassword,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.example.eurekaclient.model.ShopUser" >
+        update shop_user
+        set shop_account = #{shopAccount,jdbcType=VARCHAR},
+            shop_password = #{shopPassword,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+</mapper>
