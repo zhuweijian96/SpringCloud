@@ -6,6 +6,26 @@ eureka:
       defaultZone: http://peer1:8081/eureka/
 
 spring:
+  #数据源配置
+  datasource:
+    url: jdbc:mysql://localhost:3306/cloudshop
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    filters: stat,wall,log4j2
+    logSlowSql: true
+  #服务名称
   application:
     name: eureka-client
   zipkin:
@@ -20,3 +40,11 @@ management:
         allowed-origins: "*"
         allowed-methods: "*"
 
+#配置实体类和xml路径
+mybatis:
+  typeAliasesPackage: com.example.eurekaclient.model
+  mapperLocations: classpath:com/example/eurekaclient/xml/*.xml
+
+#druid登录页面账户密码
+loginUsername: root
+loginPassword: 123456
